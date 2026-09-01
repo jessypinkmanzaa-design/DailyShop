@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUNE & SOIE — ครีมทาผิวกาย</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#151210;
+    --ink-soft:#3a3532;
+    --porcelain:#F7F5F1;
+    --porcelain-2:#EFEAE2;
+    --bronze:#8B6F47;
+    --bronze-light:#C9A876;
+    --bronze-pale:#EBDFC9;
+    --line:#DCD5C8;
+    --muted:#7a736a;
+    --white:#FFFFFF;
+    --moisturizer:#F0ECE4;
+    --massage:#DCCBB0;
+    --giftset:#201C19;
+    --oil:#C9A876;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--porcelain);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:400;
+    margin:0;
+    color:var(--ink);
+  }
+  p{margin:0; line-height:1.7; color:var(--ink-soft);}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:'Jost',sans-serif; cursor:pointer;}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,245,241,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1140px; margin:0 auto; padding:20px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; letter-spacing:0.5px;}
+  .logo span{color:var(--bronze);}
+  .nav-links{display:flex; align-items:center; gap:36px;}
+  .nav-link{
+    font-size:14px; letter-spacing:0.4px; color:var(--ink-soft);
+    padding-bottom:4px; border-bottom:1px solid transparent;
+    transition:border-color .25s, color .25s;
+  }
+  .nav-link:hover, .nav-link.active{color:var(--ink); border-color:var(--bronze);}
+  .cart-btn{
+    display:flex; align-items:center; gap:8px;
+    background:none; border:1px solid var(--ink); border-radius:999px;
+    padding:8px 16px; font-size:13px; color:var(--ink);
+    transition:background .25s, color .25s;
+  }
+  .cart-btn:hover{background:var(--ink); color:var(--porcelain);}
+  .cart-count{
+    background:var(--bronze); color:white; border-radius:50%;
+    width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center;
+    font-size:11px;
+  }
+  .nav-mobile-toggle{display:none; background:none; border:none; font-size:22px;}
+
+  /* ---------- SIGNATURE RIBBON ---------- */
+  .ribbon{display:block; width:100%; height:auto; margin:0 auto;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 60px;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center;
+  }
+  .hero-eyebrow{font-size:14px; color:var(--bronze); letter-spacing:0.3px; margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(42px, 5.5vw, 68px); line-height:1.08; font-weight:400;
+    max-width:520px;
+  }
+  .hero h1 em{font-style:italic; color:var(--bronze);}
+  .hero p.lead{margin-top:24px; font-size:17px; max-width:420px;}
+  .hero-ctas{display:flex; gap:16px; margin-top:36px;}
+  .btn{
+    padding:14px 30px; border-radius:999px; font-size:14px; letter-spacing:0.3px;
+    border:1px solid var(--ink); transition:all .25s;
+  }
+  .btn-solid{background:var(--ink); color:var(--porcelain);}
+  .btn-solid:hover{background:var(--bronze); border-color:var(--bronze);}
+  .btn-outline{background:transparent; color:var(--ink);}
+  .btn-outline:hover{background:var(--ink); color:var(--porcelain);}
+  .btn-wide{width:100%; text-align:center;}
+  .btn[disabled]{opacity:0.4; cursor:not-allowed;}
+
+  .hero-visual{position:relative; display:flex; align-items:center; justify-content:center;}
+  .jar-stage{
+    position:relative; width:100%; max-width:340px; aspect-ratio:1/1.05;
+    background:linear-gradient(160deg, var(--porcelain-2), var(--bronze-pale));
+    border-radius:6px 6px 60px 6px;
+    overflow:hidden;
+  }
+  .jar-stage img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{padding:72px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; gap:24px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(30px,3.4vw,40px); font-weight:400;}
+  .section-head p{max-width:360px; font-size:14px;}
+
+  /* ---------- BRAND STORY ---------- */
+  .story{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
+  .story-visual{
+    background:var(--giftset); border-radius:6px 6px 6px 60px; aspect-ratio:4/5;
+    overflow:hidden;
+  }
+  .story-visual img{width:100%; height:100%; object-fit:cover; display:block;}
+  .story-text p{font-size:16px; margin-bottom:18px;}
+  .story-text p:last-child{margin-bottom:0;}
+
+  /* ---------- CATEGORY STRIP ---------- */
+  .cat-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .cat-tile{
+    position:relative; border-radius:4px; padding:28px 22px; min-height:150px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    border:1px solid var(--line); transition:transform .25s, box-shadow .25s;
+    background:var(--white);
+  }
+  .cat-tile:hover{transform:translateY(-4px); box-shadow:0 18px 30px -22px rgba(20,16,12,0.35);}
+  .cat-tile .swatch{width:34px; height:34px; border-radius:50%; background-size:cover; background-position:center; box-shadow:inset 0 0 0 1px rgba(0,0,0,0.06);}
+  .cat-tile h3{font-size:20px; margin-top:20px;}
+  .cat-tile .count{font-size:12px; color:var(--muted); margin-top:4px; display:block;}
+
+  /* ---------- PRODUCTS ---------- */
+  .tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px;}
+  .tab{
+    padding:9px 20px; border-radius:999px; border:1px solid var(--line);
+    font-size:13px; color:var(--ink-soft); background:var(--white);
+    transition:all .2s;
+  }
+  .tab.active, .tab:hover{background:var(--ink); color:var(--porcelain); border-color:var(--ink);}
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .card{
+    border:1px solid var(--line); border-radius:4px; overflow:hidden; background:var(--white);
+    display:flex; flex-direction:column;
+  }
+  .card-visual{
+    aspect-ratio:1/0.85; position:relative; overflow:hidden;
+  }
+  .card-visual .photo-bg{position:absolute; inset:0; background-size:cover; background-position:center;}
+  .card-visual .tint{position:absolute; inset:0; mix-blend-mode:multiply; opacity:0.38;}
+  .card-body{padding:22px 22px 24px; display:flex; flex-direction:column; gap:10px; flex:1;}
+  .card-cat{font-size:12px; color:var(--bronze);}
+  .card-body h3{font-size:22px;}
+  .card-size{font-size:12px; color:var(--muted);}
+  .card-desc{font-size:13.5px; flex:1;}
+  .card-foot{display:flex; align-items:center; justify-content:space-between; margin-top:8px;}
+  .price{font-size:17px; font-family:'Cormorant Garamond',serif;}
+  .add-btn{
+    border:1px solid var(--ink); background:none; border-radius:999px;
+    padding:9px 18px; font-size:12.5px; transition:all .2s;
+  }
+  .add-btn:hover{background:var(--ink); color:var(--porcelain);}
+
+  /* ---------- FOOTER ---------- */
+  .footer{border-top:1px solid var(--line); padding:56px 0 40px; margin-top:40px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;}
+  .footer h4{font-size:14px; margin-bottom:14px; color:var(--ink);}
+  .footer p, .footer a{font-size:13px; color:var(--muted); line-height:2;}
+  .footer-bottom{margin-top:48px; font-size:12px; color:var(--muted); border-top:1px solid var(--line); padding-top:20px;}
+
+  /* ---------- FORM (register / shipping) ---------- */
+  .form-page{padding:100px 0 90px;}
+  .form-card{
+    max-width:480px; margin:0 auto; background:var(--white);
+    border:1px solid var(--line); border-radius:4px; padding:48px 44px;
+  }
+  .form-card.wide{max-width:960px;}
+  .form-head{text-align:left; margin-bottom:32px;}
+  .form-head h2{font-size:32px;}
+  .form-head p{font-size:14px; margin-top:10px;}
+  .field{margin-bottom:20px;}
+  .field label{display:block; font-size:12.5px; color:var(--ink-soft); margin-bottom:8px; letter-spacing:0.2px;}
+  .field input, .field select{
+    width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:3px;
+    font-family:'Jost',sans-serif; font-size:14px; background:var(--porcelain); color:var(--ink);
+  }
+  .field input:focus, .field select:focus{outline:none; border-color:var(--bronze);}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .radio-card{
+    display:flex; align-items:flex-start; gap:12px; border:1px solid var(--line);
+    border-radius:4px; padding:16px 18px; margin-bottom:12px; cursor:pointer; transition:border-color .2s, background .2s;
+  }
+  .radio-card:hover{border-color:var(--bronze-light);}
+  .radio-card.selected{border-color:var(--bronze); background:var(--bronze-pale);}
+  .radio-card input{margin-top:4px;}
+  .radio-card .rc-title{font-size:14.5px; color:var(--ink);}
+  .radio-card .rc-sub{font-size:12.5px; color:var(--muted); margin-top:2px;}
+  .radio-card .rc-price{margin-left:auto; font-size:14px; font-family:'Cormorant Garamond',serif;}
+
+  /* ---------- LAYOUT: shipping 2-col ---------- */
+  .two-col{display:grid; grid-template-columns:1.3fr 0.9fr; gap:48px; align-items:start;}
+  .side-card{border:1px solid var(--line); border-radius:4px; padding:28px 26px; background:var(--white); position:sticky; top:100px;}
+  .side-card h3{font-size:20px; margin-bottom:18px;}
+  .side-row{display:flex; justify-content:space-between; font-size:13.5px; padding:8px 0; color:var(--ink-soft);}
+  .side-row.total{border-top:1px solid var(--line); margin-top:10px; padding-top:16px; font-size:16px; color:var(--ink);}
+
+  /* ---------- ORDER / CART page ---------- */
+  .cart-row{
+    display:grid; grid-template-columns:64px 1fr auto auto; gap:18px; align-items:center;
+    padding:18px 0; border-bottom:1px solid var(--line);
+  }
+  .cart-thumb{width:56px; height:56px; border-radius:4px; background-size:cover; background-position:center; position:relative; overflow:hidden;}
+  .cart-thumb .tint{position:absolute; inset:0; mix-blend-mode:multiply; opacity:0.38;}
+  .cart-name{font-size:16px; font-family:'Cormorant Garamond',serif;}
+  .cart-cat{font-size:11.5px; color:var(--muted); margin-top:2px;}
+  .qty-box{display:flex; align-items:center; border:1px solid var(--line); border-radius:999px; overflow:hidden;}
+  .qty-box button{width:28px; height:28px; background:none; border:none; font-size:14px;}
+  .qty-box span{width:26px; text-align:center; font-size:13px;}
+  .remove-link{font-size:12px; color:var(--muted); border-bottom:1px solid var(--muted); margin-top:6px; display:inline-block;}
+  .remove-link:hover{color:var(--ink); border-color:var(--ink);}
+  .promo-row{display:flex; gap:10px; margin-top:24px;}
+  .promo-row input{flex:1; padding:11px 14px; border:1px solid var(--line); border-radius:3px; background:var(--porcelain); font-family:'Jost',sans-serif;}
+  .promo-msg{font-size:12.5px; margin-top:8px;}
+  .empty-state{padding:60px 0; text-align:center;}
+  .empty-state h3{font-size:24px; margin-bottom:12px;}
+
+  /* ---------- CONFIRM ---------- */
+  .confirm-box{text-align:center; padding:70px 20px;}
+  .confirm-ring{
+    width:76px; height:76px; border-radius:50%; border:1px solid var(--bronze);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 28px;
+  }
+
+  /* ---------- TOAST ---------- */
+  .toast{
+    position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--porcelain); padding:13px 26px; border-radius:999px;
+    font-size:13px; opacity:0; pointer-events:none; transition:all .3s; z-index:200;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  .page{display:none;}
+  .page.active{display:block;}
+
+  @media(max-width:860px){
+    .hero-grid, .story{grid-template-columns:1fr;}
+    .story-visual{order:-1; aspect-ratio:16/9;}
+    .cat-strip{grid-template-columns:repeat(2,1fr);}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:1fr;}
+    .two-col{grid-template-columns:1fr;}
+    .side-card{position:static;}
+    .nav-links{position:fixed; top:73px; left:0; right:0; background:var(--porcelain); flex-direction:column; align-items:flex-start; padding:20px 32px; gap:20px; border-bottom:1px solid var(--line); display:none;}
+    .nav-links.open{display:flex;}
+    .nav-mobile-toggle{display:block;}
+  }
+  @media(max-width:560px){
+    .grid, .cat-strip{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-jar" viewBox="0 0 100 110">
+      <rect x="40" y="6" width="20" height="10" rx="2" fill="currentColor" opacity="0.9"/>
+      <rect x="30" y="16" width="40" height="12" rx="3" fill="currentColor"/>
+      <path d="M24 30 h52 a4 4 0 0 1 4 4 v58 a10 10 0 0 1 -10 10 h-40 a10 10 0 0 1 -10 -10 v-58 a4 4 0 0 1 4 -4 z" fill="currentColor" opacity="0.16"/>
+      <path d="M24 30 h52 a4 4 0 0 1 4 4 v10 h-60 v-10 a4 4 0 0 1 4 -4 z" fill="currentColor" opacity="0.35"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo" onclick="showPage('home');return false;">LUNE <span>&</span> SOIE</a>
+    <button class="nav-mobile-toggle" onclick="toggleMobileNav()">&#9776;</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#" class="nav-link" data-nav="home" onclick="showPage('home');return false;">หน้าหลัก</a>
+      <a href="#" class="nav-link" data-nav="products" onclick="showPage('products');return false;">สินค้า</a>
+      <a href="#" class="nav-link" data-nav="register" onclick="showPage('register');return false;">สมัครสมาชิก</a>
+      <button class="cart-btn" onclick="showPage('order');return false;">
+        ตะกร้า <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HOME ================= -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow">ครีมทาผิวกาย เนื้อบำรุงเข้มข้น</div>
+        <h1>ผิวที่นุ่มลื่น<br><em>ราวกับผ้าไหม</em><br>ทุกค่ำคืน</h1>
+        <p class="lead">LUNE & SOIE ผสมน้ำมันหอมระเหยและเชียบัตเตอร์แท้ในสูตรที่ซึมไว ไม่เหนียวเหนอะ เพื่อผิวกายที่รู้สึกได้ตั้งแต่การสัมผัสแรก</p>
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-solid" onclick="showPage('products');return false;">ช้อปคอลเลกชัน</a>
+          <a href="#" class="btn btn-outline" onclick="showPage('register');return false;">สมัครสมาชิก</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="jar-stage">
+          <img src="https://images.unsplash.com/photo-1744309696748-e341f63a18b8?w=900&q=80&auto=format&fit=crop" alt="ครีมทาผิวกาย LUNE & SOIE เนื้อบำรุงในโหลแก้ว">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="ribbon" viewBox="0 0 1140 40" preserveAspectRatio="none">
+    <path d="M0 20 C 220 0, 420 40, 640 18 S 980 -4, 1140 20" fill="none" stroke="var(--bronze-light)" stroke-width="1.2"/>
+  </svg>
+
+  <section class="section">
+    <div class="wrap story">
+      <div class="story-visual">
+        <img src="https://images.unsplash.com/photo-1619451427882-6aaaded0cc61?w=900&q=80&auto=format&fit=crop" alt="การทาครีมบำรุงผิวกาย LUNE & SOIE">
+      </div>
+      <div class="story-text">
+        <div class="hero-eyebrow">เรื่องราวของเรา</div>
+        <h2 style="font-size:34px; margin-bottom:20px;">บ่มเพาะจากงานฝีมือ<br>ไม่ใช่สายพานผลิต</h2>
+        <p>ทุกขวดของ LUNE & SOIE ผสมด้วยมือในรอบเล็ก ไม่เกิน 200 ขวดต่อครั้ง เพื่อคุมคุณภาพเนื้อครีมและกลิ่นให้คงที่ทุกล็อต</p>
+        <p>เราเลือกใช้เชียบัตเตอร์จากกานาและน้ำมันโจโจบาแบบสกัดเย็น ปราศจากพาราเบนและน้ำหอมสังเคราะห์ เหมาะกับผิวแพ้ง่าย</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>เลือกตามความต้องการผิว</h2>
+        <p>สี่หมวดหมู่หลัก ออกแบบมาให้เข้ากับกิจวัตรของคุณ ตั้งแต่เช้าจรดค่ำ</p>
+      </div>
+      <div class="cat-strip">
+        <div class="cat-tile" onclick="goToCategory('moisturizer')">
+          <span class="swatch" style="background-image:url('https://images.unsplash.com/photo-1715702130909-a5b2942a411b?w=200&q=70&auto=format&fit=crop');"></span>
+          <div><h3>บำรุงผิวกาย</h3><span class="count">3 รายการ</span></div>
+        </div>
+        <div class="cat-tile" onclick="goToCategory('massage')">
+          <span class="swatch" style="background-image:url('https://images.unsplash.com/photo-1671493229066-f36e86b35841?w=200&q=70&auto=format&fit=crop');"></span>
+          <div><h3>ครีมนวดผ่อนคลาย</h3><span class="count">2 รายการ</span></div>
+        </div>
+        <div class="cat-tile" onclick="goToCategory('oil')">
+          <span class="swatch" style="background-image:url('https://images.unsplash.com/photo-1671493229066-f36e86b35841?w=200&q=70&auto=format&fit=crop');"></span>
+          <div><h3>น้ำมันบำรุงผิว</h3><span class="count">2 รายการ</span></div>
+        </div>
+        <div class="cat-tile" onclick="goToCategory('giftset')">
+          <span class="swatch" style="background-image:url('https://images.unsplash.com/photo-1744309696748-e341f63a18b8?w=200&q=70&auto=format&fit=crop');"></span>
+          <div><h3>เซ็ทของขวัญ</h3><span class="count">1 รายการ</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= REGISTER ================= -->
+<div class="page" id="page-register">
+  <section class="form-page">
+    <div class="wrap">
+      <div class="form-card">
+        <div class="form-head">
+          <h2>สมัครสมาชิก</h2>
+          <p>รับส่วนลด 10% สำหรับคำสั่งซื้อแรก และสิทธิพิเศษเดือนเกิด</p>
+        </div>
+        <form id="registerForm" onsubmit="return handleRegister(event)">
+          <div class="field-row">
+            <div class="field"><label>ชื่อ</label><input type="text" required></div>
+            <div class="field"><label>นามสกุล</label><input type="text" required></div>
+          </div>
+          <div class="field"><label>อีเมล</label><input type="email" required></div>
+          <div class="field"><label>เบอร์โทรศัพท์</label><input type="tel" required pattern="[0-9]{9,10}"></div>
+          <div class="field"><label>วันเกิด</label><input type="date"></div>
+          <div class="field-row">
+            <div class="field"><label>รหัสผ่าน</label><input type="password" id="regPass" required minlength="6"></div>
+            <div class="field"><label>ยืนยันรหัสผ่าน</label><input type="password" id="regPass2" required minlength="6"></div>
+          </div>
+          <div id="regError" style="font-size:12.5px; color:#B34747; margin-bottom:14px; display:none;">รหัสผ่านไม่ตรงกัน กรุณาลองใหม่</div>
+          <button type="submit" class="btn btn-solid btn-wide">สมัครสมาชิก</button>
+        </form>
+        <div id="regSuccess" style="display:none; text-align:center; padding:12px 0;">
+          <div class="confirm-ring" style="width:56px;height:56px;margin-bottom:18px;"><svg width="20" height="20" style="color:var(--bronze)"><use href="#icon-check"/></svg></div>
+          <h3 style="font-size:22px; margin-bottom:8px;">ยินดีต้อนรับสู่ LUNE & SOIE</h3>
+          <p style="font-size:13.5px;">สมัครสมาชิกสำเร็จ โค้ดส่วนลด 10% ของคุณคือ <strong>WELCOME10</strong></p>
+          <a href="#" class="btn btn-outline" style="margin-top:22px; display:inline-block;" onclick="showPage('products');return false;">เริ่มช้อปปิ้ง</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= PRODUCTS ================= -->
+<div class="page" id="page-products">
+  <section class="section" style="padding-top:56px;">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>สินค้าทั้งหมด</h2>
+        <p>เลือกดูตามหมวดหมู่ หรือดูทั้งหมดในคอลเลกชันของเรา</p>
+      </div>
+      <div class="tabs" id="tabBar">
+        <button class="tab active" data-cat="all" onclick="filterCategory('all')">ทั้งหมด</button>
+        <button class="tab" data-cat="moisturizer" onclick="filterCategory('moisturizer')">บำรุงผิวกาย</button>
+        <button class="tab" data-cat="massage" onclick="filterCategory('massage')">ครีมนวดผ่อนคลาย</button>
+        <button class="tab" data-cat="oil" onclick="filterCategory('oil')">น้ำมันบำรุงผิว</button>
+        <button class="tab" data-cat="giftset" onclick="filterCategory('giftset')">เซ็ทของขวัญ</button>
+      </div>
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ORDER SUMMARY ================= -->
+<div class="page" id="page-order">
+  <section class="section" style="padding-top:56px;">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>สรุปการสั่งซื้อ</h2>
+        <p>ตรวจสอบรายการก่อนดำเนินการจัดส่ง</p>
+      </div>
+      <div id="orderContent"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SHIPPING ================= -->
+<div class="page" id="page-shipping">
+  <section class="section" style="padding-top:56px;">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>การจัดส่ง</h2>
+        <p>กรอกที่อยู่และเลือกวิธีการจัดส่งที่คุณสะดวก</p>
+      </div>
+
+      <div id="shippingForm">
+        <div class="two-col">
+          <div>
+            <div class="form-card wide" style="margin:0;">
+              <h3 style="font-size:20px; margin-bottom:20px;">ที่อยู่จัดส่ง</h3>
+              <div class="field-row">
+                <div class="field"><label>ชื่อผู้รับ</label><input type="text" id="shipName" required></div>
+                <div class="field"><label>เบอร์โทรศัพท์</label><input type="tel" id="shipPhone" required></div>
+              </div>
+              <div class="field"><label>ที่อยู่</label><input type="text" id="shipAddress" required></div>
+              <div class="field-row">
+                <div class="field"><label>ตำบล/แขวง</label><input type="text" id="shipSub" required></div>
+                <div class="field"><label>อำเภอ/เขต</label><input type="text" id="shipDist" required></div>
+              </div>
+              <div class="field-row">
+                <div class="field"><label>จังหวัด</label><input type="text" id="shipProv" required></div>
+                <div class="field"><label>รหัสไปรษณีย์</label><input type="text" id="shipZip" required pattern="[0-9]{5}"></div>
+              </div>
+
+              <h3 style="font-size:20px; margin:28px 0 16px;">วิธีจัดส่ง</h3>
+              <label class="radio-card selected" id="ship-standard" onclick="selectShipping('standard')">
+                <input type="radio" name="shipMethod" checked>
+                <div><div class="rc-title">จัดส่งมาตรฐาน (3–5 วันทำการ)</div><div class="rc-sub">ฟรีเมื่อสั่งซื้อครบ 990 บาท</div></div>
+                <div class="rc-price" id="stdPriceLabel">฿0</div>
+              </label>
+              <label class="radio-card" id="ship-express" onclick="selectShipping('express')">
+                <input type="radio" name="shipMethod">
+                <div><div class="rc-title">จัดส่งด่วน (1–2 วันทำการ)</div><div class="rc-sub">จัดส่งโดยเคอรี่เอ็กซ์เพรส</div></div>
+                <div class="rc-price">฿100</div>
+              </label>
+
+              <h3 style="font-size:20px; margin:28px 0 16px;">วิธีชำระเงิน</h3>
+              <label class="radio-card selected" id="pay-transfer" onclick="selectPayment('transfer')">
+                <input type="radio" name="payMethod" checked>
+                <div><div class="rc-title">โอนเงินผ่านธนาคาร</div><div class="rc-sub">แนบสลิปหลังโอนภายใน 24 ชม.</div></div>
+              </label>
+              <label class="radio-card" id="pay-cod" onclick="selectPayment('cod')">
+                <input type="radio" name="payMethod">
+                <div><div class="rc-title">เก็บเงินปลายทาง</div><div class="rc-sub">ชำระเงินสดเมื่อได้รับสินค้า</div></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="side-card">
+            <h3>ยอดชำระ</h3>
+            <div id="shipSideRows"></div>
+            <button class="btn btn-solid btn-wide" style="margin-top:20px;" onclick="placeOrder()">ยืนยันสั่งซื้อ</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="shipConfirm" style="display:none;" class="confirm-box">
+        <div class="confirm-ring"><svg width="24" height="24" style="color:var(--bronze)"><use href="#icon-check"/></svg></div>
+        <h2 style="font-size:30px; margin-bottom:12px;">ขอบคุณสำหรับคำสั่งซื้อ</h2>
+        <p>หมายเลขคำสั่งซื้อของคุณคือ <strong id="orderNo"></strong></p>
+        <p style="margin-top:6px;">เราจะจัดส่งอีเมลยืนยันและแจ้งเลขพัสดุเมื่อสินค้าออกจากคลัง</p>
+        <a href="#" class="btn btn-outline" style="margin-top:28px; display:inline-block;" onclick="resetAndGoHome();return false;">กลับสู่หน้าหลัก</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;">LUNE <span style="color:var(--bronze);">&</span> SOIE</div>
+        <p style="max-width:280px;">ครีมทาผิวกายเนื้อบำรุง ผสมด้วยมือเป็นรอบเล็ก จากเชียบัตเตอร์และน้ำมันสกัดเย็น</p>
+      </div>
+      <div>
+        <h4>ช่วยเหลือ</h4>
+        <a href="#" style="display:block;">วิธีการสั่งซื้อ</a>
+        <a href="#" style="display:block;">การจัดส่งและคืนสินค้า</a>
+        <a href="#" style="display:block;">ติดต่อเรา</a>
+      </div>
+      <div>
+        <h4>ติดตามเรา</h4>
+        <a href="#" style="display:block;">Instagram</a>
+        <a href="#" style="display:block;">Line Official</a>
+        <a href="#" style="display:block;">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 LUNE & SOIE. สงวนลิขสิทธิ์ทั้งหมด</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- DATA ---------------- */
+const IMG = {
+  moisturizer: 'https://images.unsplash.com/photo-1715702130909-a5b2942a411b?w=700&q=75&auto=format&fit=crop',
+  massage: 'https://images.unsplash.com/photo-1671493229066-f36e86b35841?w=700&q=75&auto=format&fit=crop',
+  oil: 'https://images.unsplash.com/photo-1671493229066-f36e86b35841?w=700&q=75&auto=format&fit=crop',
+  giftset: 'https://images.unsplash.com/photo-1744309696748-e341f63a18b8?w=700&q=75&auto=format&fit=crop'
+};
+const products = [
+  {id:1, cat:'moisturizer', catLabel:'บำรุงผิวกาย', name:'ครีมบำรุงผิวกาย เชียบัตเตอร์', size:'200 มล.', price:890, desc:'เนื้อครีมเข้มข้น ซึมไว บำรุงผิวแห้งกร้านให้นุ่มชุ่มชื้นตลอดวัน', color:'var(--moisturizer)'},
+  {id:2, cat:'moisturizer', catLabel:'บำรุงผิวกาย', name:'โลชั่นน้ำนมข้าว', size:'250 มล.', price:650, desc:'เนื้อบางเบา ซึมเร็ว เหมาะสำหรับใช้ทุกวันในสภาพอากาศร้อนชื้น', color:'var(--moisturizer)'},
+  {id:3, cat:'moisturizer', catLabel:'บำรุงผิวกาย', name:'ครีมบำรุงผิวส้มโอ', size:'200 มล.', price:790, desc:'กลิ่นหอมสดชื่น บำรุงผิวให้กระจ่างใสอย่างเป็นธรรมชาติ', color:'var(--moisturizer)'},
+  {id:4, cat:'massage', catLabel:'ครีมนวดผ่อนคลาย', name:'ครีมนวดลาเวนเดอร์', size:'150 มล.', price:990, desc:'ผสมน้ำมันลาเวนเดอร์แท้ ช่วยผ่อนคลายกล้ามเนื้อก่อนนอน', color:'var(--massage)'},
+  {id:5, cat:'massage', catLabel:'ครีมนวดผ่อนคลาย', name:'ครีมนวดขิงอุ่นผิว', size:'150 มล.', price:990, desc:'ให้ความอบอุ่น เหมาะสำหรับนวดคลายเมื่อยหลังวันที่เหนื่อยล้า', color:'var(--massage)'},
+  {id:6, cat:'oil', catLabel:'น้ำมันบำรุงผิว', name:'น้ำมันโจโจบาสกัดเย็น', size:'100 มล.', price:1190, desc:'น้ำมันบริสุทธิ์ 100% ซึมไว ไม่อุดตันรูขุมขน ใช้ได้ทั้งหน้าและกาย', color:'var(--oil)'},
+  {id:7, cat:'oil', catLabel:'น้ำมันบำรุงผิว', name:'น้ำมันอาร์แกนโมร็อกโก', size:'100 มล.', price:1290, desc:'อุดมด้วยวิตามินอี ฟื้นบำรุงผิวแห้งเสียให้กลับมายืดหยุ่น', color:'var(--oil)'},
+  {id:8, cat:'giftset', catLabel:'เซ็ทของขวัญ', name:'เซ็ทของขวัญ Silk Ritual', size:'3 ชิ้น', price:2190, desc:'ครีมบำรุงผิว โลชั่น และน้ำมันหอม จัดในกล่องพร้อมมอบเป็นของขวัญ', color:'var(--giftset)'}
+];
+products.forEach(p => p.img = IMG[p.cat]);
+
+let cart = [];
+let currentCategory = 'all';
+let shippingMethod = 'standard';
+let paymentMethod = 'transfer';
+let appliedPromo = null;
+
+/* ---------------- NAV / PAGES ---------------- */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.nav === id));
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+  if(id === 'order') renderOrder();
+  if(id === 'shipping') renderShippingSide();
+}
+function toggleMobileNav(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
+function goToCategory(cat){
+  showPage('products');
+  filterCategory(cat);
+}
+
+/* ---------------- PRODUCTS ---------------- */
+function renderProducts(){
+  const grid = document.getElementById('productGrid');
+  const list = currentCategory === 'all' ? products : products.filter(p => p.cat === currentCategory);
+  grid.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="card-visual">
+        <div class="photo-bg" style="background-image:url('${p.img}');"></div>
+        <div class="tint" style="background:${p.color};"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${p.catLabel}</div>
+        <h3>${p.name}</h3>
+        <div class="card-size">${p.size}</div>
+        <p class="card-desc">${p.desc}</p>
+        <div class="card-foot">
+          <span class="price">฿${p.price.toLocaleString()}</span>
+          <button class="add-btn" onclick="addToCart(${p.id})">เพิ่มลงตะกร้า</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function filterCategory(cat){
+  currentCategory = cat;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+  renderProducts();
+}
+
+/* ---------------- CART ---------------- */
+function addToCart(id){
+  const existing = cart.find(c => c.id === id);
+  if(existing){ existing.qty += 1; } else { cart.push({id, qty:1}); }
+  updateCartBadge();
+  showToast('เพิ่มลงตะกร้าแล้ว');
+}
+function changeQty(id, delta){
+  const item = cart.find(c => c.id === id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) cart = cart.filter(c => c.id !== id);
+  updateCartBadge();
+  renderOrder();
+  renderShippingSide();
+}
+function removeFromCart(id){
+  cart = cart.filter(c => c.id !== id);
+  updateCartBadge();
+  renderOrder();
+}
+function updateCartBadge(){
+  const count = cart.reduce((s,c) => s + c.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+}
+function cartSubtotal(){
+  return cart.reduce((sum,c) => {
+    const p = products.find(p => p.id === c.id);
+    return sum + p.price * c.qty;
+  }, 0);
+}
+function discountAmount(subtotal){
+  if(appliedPromo === 'WELCOME10') return Math.round(subtotal * 0.10);
+  return 0;
+}
+function shippingFee(subtotal){
+  if(shippingMethod === 'express') return 100;
+  return subtotal >= 990 ? 0 : 60;
+}
+
+function renderOrder(){
+  const container = document.getElementById('orderContent');
+  if(cart.length === 0){
+    container.innerHTML = `
+      <div class="empty-state">
+        <h3>ยังไม่มีสินค้าในตะกร้า</h3>
+        <p style="margin-bottom:24px;">เลือกชมคอลเลกชันครีมทาผิวของเรา</p>
+        <a href="#" class="btn btn-solid" onclick="showPage('products');return false;">ไปเลือกสินค้า</a>
+      </div>`;
+    return;
+  }
+  const subtotal = cartSubtotal();
+  const discount = discountAmount(subtotal);
+  const fee = shippingFee(subtotal);
+  const total = subtotal - discount + fee;
+
+  const rows = cart.map(c => {
+    const p = products.find(p => p.id === c.id);
+    return `
+      <div class="cart-row">
+        <div class="cart-thumb" style="background-image:url('${p.img}');">
+          <div class="tint" style="background:${p.color};"></div>
+        </div>
+        <div>
+          <div class="cart-name">${p.name}</div>
+          <div class="cart-cat">${p.catLabel} · ${p.size}</div>
+          <a href="#" class="remove-link" onclick="removeFromCart(${p.id});return false;">นำออก</a>
+        </div>
+        <div class="qty-box">
+          <button onclick="changeQty(${p.id},-1)">−</button>
+          <span>${c.qty}</span>
+          <button onclick="changeQty(${p.id},1)">+</button>
+        </div>
+        <div class="price">฿${(p.price*c.qty).toLocaleString()}</div>
+      </div>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="two-col">
+      <div>${rows}
+        <div class="promo-row">
+          <input type="text" id="promoInput" placeholder="รหัสส่วนลด (ลอง WELCOME10)">
+          <button class="btn btn-outline" onclick="applyPromo()">ใช้โค้ด</button>
+        </div>
+        <div class="promo-msg" id="promoMsg" style="color:${appliedPromo ? 'var(--bronze)' : 'var(--muted)'}">
+          ${appliedPromo ? 'ใช้โค้ด ' + appliedPromo + ' แล้ว ลด 10%' : ''}
+        </div>
+      </div>
+      <div class="side-card">
+        <h3>สรุปยอด</h3>
+        <div class="side-row"><span>ยอดรวมสินค้า</span><span>฿${subtotal.toLocaleString()}</span></div>
+        ${discount > 0 ? `<div class="side-row"><span>ส่วนลด</span><span>−฿${discount.toLocaleString()}</span></div>` : ''}
+        <div class="side-row"><span>ค่าจัดส่งโดยประมาณ</span><span>${fee === 0 ? 'ฟรี' : '฿' + fee}</span></div>
+        <div class="side-row total"><span>ยอดสุทธิ</span><span>฿${total.toLocaleString()}</span></div>
+        <button class="btn btn-solid btn-wide" style="margin-top:18px;" onclick="showPage('shipping')">ดำเนินการจัดส่ง</button>
+      </div>
+    </div>
+  `;
+}
+
+function applyPromo(){
+  const val = document.getElementById('promoInput').value.trim().toUpperCase();
+  const msg = document.getElementById('promoMsg');
+  if(val === 'WELCOME10'){
+    appliedPromo = val;
+    msg.style.color = 'var(--bronze)';
+    msg.textContent = 'ใช้โค้ด WELCOME10 แล้ว ลด 10%';
+  } else {
+    appliedPromo = null;
+    msg.style.color = '#B34747';
+    msg.textContent = 'ไม่พบรหัสส่วนลดนี้';
+  }
+  renderOrder();
+}
+
+/* ---------------- SHIPPING ---------------- */
+function selectShipping(method){
+  shippingMethod = method;
+  document.getElementById('ship-standard').classList.toggle('selected', method === 'standard');
+  document.getElementById('ship-express').classList.toggle('selected', method === 'express');
+  document.querySelectorAll('input[name="shipMethod"]').forEach(r => {
+    r.checked = (r.closest('.radio-card').id === 'ship-' + method);
+  });
+  renderShippingSide();
+}
+function selectPayment(method){
+  paymentMethod = method;
+  document.getElementById('pay-transfer').classList.toggle('selected', method === 'transfer');
+  document.getElementById('pay-cod').classList.toggle('selected', method === 'cod');
+  document.querySelectorAll('input[name="payMethod"]').forEach(r => {
+    r.checked = (r.closest('.radio-card').id === 'pay-' + method);
+  });
+}
+function renderShippingSide(){
+  const subtotal = cartSubtotal();
+  const discount = discountAmount(subtotal);
+  const fee = shippingFee(subtotal);
+  const total = subtotal - discount + fee;
+  document.getElementById('shipSideRows').innerHTML = `
+    <div class="side-row"><span>ยอดรวมสินค้า (${cart.reduce((s,c)=>s+c.qty,0)} ชิ้น)</span><span>฿${subtotal.toLocaleString()}</span></div>
+    ${discount > 0 ? `<div class="side-row"><span>ส่วนลด</span><span>−฿${discount.toLocaleString()}</span></div>` : ''}
+    <div class="side-row"><span>ค่าจัดส่ง</span><span>${fee === 0 ? 'ฟรี' : '฿' + fee}</span></div>
+    <div class="side-row total"><span>ยอดชำระทั้งหมด</span><span>฿${total.toLocaleString()}</span></div>
+  `;
+  const stdLabel = document.getElementById('stdPriceLabel');
+  if(stdLabel) stdLabel.textContent = subtotal >= 990 ? 'ฟรี' : '฿60';
+}
+function placeOrder(){
+  if(cart.length === 0){
+    showToast('กรุณาเลือกสินค้าก่อนสั่งซื้อ');
+    showPage('products');
+    return;
+  }
+  const required = ['shipName','shipPhone','shipAddress','shipSub','shipDist','shipProv','shipZip'];
+  for(const id of required){
+    if(!document.getElementById(id).value.trim()){
+      showToast('กรุณากรอกที่อยู่จัดส่งให้ครบถ้วน');
+      document.getElementById(id).focus();
+      return;
+    }
+  }
+  const orderNo = 'LS' + Math.floor(100000 + Math.random()*900000);
+  document.getElementById('orderNo').textContent = orderNo;
+  document.getElementById('shippingForm').style.display = 'none';
+  document.getElementById('shipConfirm').style.display = 'block';
+  cart = [];
+  updateCartBadge();
+}
+function resetAndGoHome(){
+  document.getElementById('shippingForm').style.display = 'block';
+  document.getElementById('shipConfirm').style.display = 'none';
+  document.getElementById('registerForm').reset();
+  showPage('home');
+}
+
+/* ---------------- REGISTER ---------------- */
+function handleRegister(e){
+  e.preventDefault();
+  const p1 = document.getElementById('regPass').value;
+  const p2 = document.getElementById('regPass2').value;
+  const err = document.getElementById('regError');
+  if(p1 !== p2){
+    err.style.display = 'block';
+    return false;
+  }
+  err.style.display = 'none';
+  document.getElementById('registerForm').style.display = 'none';
+  document.getElementById('regSuccess').style.display = 'block';
+  return false;
+}
+
+/* ---------------- TOAST ---------------- */
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ---------------- INIT ---------------- */
+renderProducts();
+</script>
+</body>
+</html>
